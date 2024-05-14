@@ -21,15 +21,34 @@ class FamilyStructure:
 
     def add_member(self, member):
         # fill this method and update the return
-        pass
+        try:
+            if 'id' not in member:
+                member['id'] = self._generateId()
+        
+            
+        except KeyError:
+            member['id'] = self._generateId()
 
+        if member in self._members:
+            print("Member already exists")
+        else:
+            self._members.append(member)
+
+       
     def delete_member(self, id):
-        # fill this method and update the return
-        pass
+        for member in self._members:
+            if member['id'] == int(id):
+                self._members.remove(member)
+                return {"done": True}
+        
 
     def get_member(self, id):
-        # fill this method and update the return
-        pass
+        for index, member in enumerate(self._members):
+            if member.get('id') == id:
+                index_to_get = index
+        if index_to_get is not None:
+            return self._members[index_to_get]
+               
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
